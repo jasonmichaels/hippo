@@ -1,17 +1,13 @@
 import { orderBy, get } from 'lodash';
-import { IPost } from '../hooks/useAxios';
-
-interface IHash {
-  [k: string]: IPost[];
-}
+import { IPostsHash, TPostsArray, IPost } from '../types/post';
 
 class PostUtils {
-  static keyByAuthorSort(posts: IPost[]): IHash | [] {
+  static keyByAuthorSort(posts: IPost[]): IPostsHash  {
     if (!posts?.length) {
-      return [];
+      return {};
     }
 
-    const hash: IHash = {};
+    const hash: IPostsHash = {};
 
     for (const post of posts) {
       if ('string' === typeof post?.author?.id) {
@@ -26,7 +22,7 @@ class PostUtils {
     return hash;
   }
 
-  static getLatestForAuthors(posts: IHash): IPost[] {
+  static getLatestForAuthors(posts: IPostsHash): TPostsArray {
     const latest = [];
 
     for (const key in posts) {

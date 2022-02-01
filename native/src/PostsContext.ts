@@ -1,16 +1,16 @@
 import { createContext } from 'react';
 import { AxiosError } from 'axios';
 
-import { IPost } from './hooks/useAxios';
+import { IPostsHash } from './types/post';
 
 interface IContext {
-  posts: IPost[] | null;
+  posts: IPostsHash;
   error: AxiosError | null;
   isLoading: boolean;
 }
 
 const defaultState = {
-  posts: [],
+  posts: {},
   error: null,
   isLoading: true
 }

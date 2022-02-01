@@ -1,16 +1,8 @@
 import React from 'react';
 import axios, { AxiosError, Method } from 'axios';
 
-export interface IPost {
-  id: string;
-  title: string;
-  body: string;
-  publishedAt: string;
-  author: {
-    id: string;
-    name: string;
-  }
-}
+import { IPostsHash } from '../types/post';
+import PostUtils from '../utils/PostUtils';
 
 interface IProps {
   method: Method;
@@ -18,13 +10,13 @@ interface IProps {
 }
 
 interface IReturn {
-  result: null | IPost[];
+  result: IPostsHash;
   error: AxiosError | null;
   isLoading: boolean;
 }
 
 const useAxios = ({ method, url }: IProps): IReturn => {
-  const [result, setResult] = React.useState(null);
+  const [result, setResult] = React.useState<IPostsHash>({});
   const [error, setError] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -36,7 +28,7 @@ const useAxios = ({ method, url }: IProps): IReturn => {
       });
 
       if ([200].includes(response.status)) {
-        setResult(response.data);
+        setResult(PostUtils.keyByAuthorSort(response.data));
       }
     } catch (e: AxiosError | any) {
       setError(e);
