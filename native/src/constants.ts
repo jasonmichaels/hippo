@@ -2,15 +2,15 @@ import { Method } from 'axios';
 
 const NAVIGATION = {
   POSTS: 'posts',
-  POST: 'post'
-}
+  POST: 'post',
+};
 
 const METHODS: Record<string, Method> = {
-  GET: 'GET'
-}
+  GET: 'GET',
+};
 
 const URLS = {
-  POSTS: 'http://localhost:4000/posts'
-}
+  POSTS: 'http://localhost:4000/posts',
+};
 
 export { METHODS, URLS, NAVIGATION };

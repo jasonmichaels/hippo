@@ -12,8 +12,8 @@ interface IContext {
 const defaultState = {
   posts: {},
   error: null,
-  isLoading: true
-}
+  isLoading: true,
+};
 
 const PostsContext = createContext<IContext>(defaultState);
 

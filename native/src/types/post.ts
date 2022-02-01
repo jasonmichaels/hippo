@@ -6,10 +6,10 @@ export interface IPost {
   author: {
     id: string;
     name: string;
-  }
+  };
 }
 
-export type TPostsArray = IPost[] ;
+export type TPostsArray = IPost[];
 
 export interface IPostsHash {
   [k: string]: TPostsArray;

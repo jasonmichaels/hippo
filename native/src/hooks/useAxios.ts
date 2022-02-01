@@ -24,7 +24,7 @@ const useAxios = ({ method, url }: IProps): IReturn => {
     try {
       const response = await axios.request({
         method,
-        url
+        url,
       });
 
       if ([200].includes(response.status)) {
@@ -41,6 +41,6 @@ const useAxios = ({ method, url }: IProps): IReturn => {
   }, []);
 
   return { result, error, isLoading };
-}
+};
 
 export default useAxios;
