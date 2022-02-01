@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   inputAndroid: {
     borderColor: colors.lightGray,
     borderRadius: borderRadius,
-    borderWidth: borderWidth,
+    borderWidth: borderWidth * 2,
     color: colors.black,
     fontSize: sizes.md,
     height: 48,

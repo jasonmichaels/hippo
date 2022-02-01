@@ -27,7 +27,10 @@ export function App() {
   return (
     <PostsContext.Provider value={{ posts, error, isLoading }}>
       <NavigationContainer theme={theme}>
-        <Stack.Navigator initialRouteName={NAVIGATION.POSTS}>
+        <Stack.Navigator
+          initialRouteName={NAVIGATION.POSTS}
+          screenOptions={{ headerTitleAlign: 'center' }}
+        >
           <Stack.Screen
             name={NAVIGATION.POSTS}
             component={Posts}

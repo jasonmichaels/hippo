@@ -1,6 +1,8 @@
 import { orderBy, last, flatten, values, trim } from 'lodash';
-import { TOptions } from '../types/extra';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
+import { TOptions } from '../types/extra';
 import { IPostsHash, TPostsArray, IPost } from '../types/post';
 
 /**
@@ -44,7 +46,7 @@ class PostUtils {
            * to a common format for more reliable sorting.
            */
           publishedAt: PostUtils.utcToLocalDateTime(post.publishedAt),
-          lastName: last(post.author.name.split(' '))
+          lastName: last(post.author.name.split(' ')),
         };
 
         if (!hash?.[post.author.id]) {
@@ -108,7 +110,7 @@ class PostUtils {
   /**
    * @static
    * @description Gets a flattened array of all authors'
-   * posts, for use in the `Posts` component, prior to 
+   * posts, for use in the `Posts` component, prior to
    * any sorting occurring.
    */
   static getPostsFromHash(posts: IPostsHash): IPost[] {

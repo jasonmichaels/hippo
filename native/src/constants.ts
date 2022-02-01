@@ -10,7 +10,7 @@ const METHODS: Record<string, Method> = {
 };
 
 const URLS = {
-  POSTS: 'http://localhost:4000/posts',
+  POSTS: 'http://192.168.4.73:4000/posts',
 };
 
 export { METHODS, URLS, NAVIGATION };

@@ -31,13 +31,13 @@ const useAxios = ({ method, url }: IProps): TUseAxiosReturn => {
     setIsLoading(true);
 
     try {
-      const response = await axios.request({
+      const { status, data } = await axios.request({
         method,
         url,
       });
 
-      if ([200].includes(response.status)) {
-        setResult(PostUtils.keyByAuthorSort(response.data));
+      if ([200].includes(status)) {
+        setResult(PostUtils.keyByAuthorSort(data));
       }
     } catch (e: AxiosError | any) {
       setError(e);

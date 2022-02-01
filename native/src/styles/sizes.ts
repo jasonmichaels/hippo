@@ -11,5 +11,6 @@ const sizes = {
 
 const borderRadius = 5;
 const borderWidth = StyleSheet.hairlineWidth;
+const elevation = 1;
 
-export { sizes, borderRadius, borderWidth };
+export { sizes, borderRadius, borderWidth, elevation };

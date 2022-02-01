@@ -1,9 +1,15 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
 import colors from '../styles/colors';
 import { margin, padding } from '../styles/layout';
-import { borderRadius, borderWidth, sizes } from '../styles/sizes';
+import { borderRadius, borderWidth, elevation, sizes } from '../styles/sizes';
 import { THandleItemPress } from '../types/extra';
 import { IPost } from '../types/post';
 import PostUtils from '../utils/PostUtils';
@@ -44,9 +50,16 @@ const styles = StyleSheet.create({
     padding: padding.lg,
     marginVertical: margin.sm,
     marginHorizontal: margin.md,
-    borderWidth: borderWidth,
-    borderColor: colors.lightGray,
-    borderRadius: borderRadius,
+    ...Platform.select({
+      android: {
+        elevation: elevation,
+      },
+      ios: {
+        borderWidth: borderWidth,
+        borderColor: colors.lightGray,
+        borderRadius: borderRadius,
+      },
+    }),
   },
   headerText: {
     fontSize: sizes.md,

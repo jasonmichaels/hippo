@@ -72,24 +72,24 @@ const Post = ({ navigation, route }: IProps): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     height: 'auto',
-    padding: padding.md
+    padding: padding.md,
   },
   body: {
     padding: padding.md,
-    paddingBottom: padding.lg
+    paddingBottom: padding.lg,
   },
   blockquote: {
     marginLeft: 0,
     paddingLeft: padding.md,
     marginBottom: margin.sm,
     borderColor: colors.lightGray,
-    backgroundColor: colors.offWhite
+    backgroundColor: colors.offWhite,
   },
   bullet_list: {
-    marginBottom: margin.md
+    marginBottom: margin.md,
   },
   ordered_list: {
-    marginBottom: margin.md
+    marginBottom: margin.md,
   },
   /**
    * These three override the default
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     fontFamily: undefined,
     marginBottom: margin.md,
     borderRadius: borderRadius,
-    borderWidth: borderWidth
+    borderWidth: borderWidth,
   },
   code_block: {
     fontFamily: undefined,
     marginBottom: margin.md,
     borderRadius: borderRadius,
-    borderWidth: borderWidth
+    borderWidth: borderWidth,
   },
   fence: {
     fontFamily: undefined,
