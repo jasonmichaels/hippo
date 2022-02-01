@@ -1,7 +1,7 @@
 import React from 'react';
 import axios, { AxiosError, Method } from 'axios';
 
-interface IPost {
+export interface IPost {
   id: string;
   title: string;
   body: string;
@@ -19,7 +19,7 @@ interface IProps {
 
 interface IReturn {
   result: null | IPost[];
-  error: AxiosError | any;
+  error: AxiosError | null;
   isLoading: boolean;
 }
 

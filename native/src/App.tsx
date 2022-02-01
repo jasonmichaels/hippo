@@ -1,25 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { METHODS, URLS } from './constants';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { METHODS, NAVIGATION, URLS } from './constants';
 import useAxios from './hooks/useAxios';
+import PostsContext from './PostsContext';
+import Posts from './screens/Posts';
+import Post from './screens/Post';
+
+const Stack = createNativeStackNavigator();
 
 export function App() {
-  const { result, error, isLoading } = useAxios({ method: METHODS.GET, url: URLS.POSTS });
-  console.log(result);
-  console.log(error);
-  console.log(isLoading);
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+  const { result: posts, error, isLoading } = useAxios({ method: METHODS.GET, url: URLS.POSTS });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <PostsContext.Provider value={{ posts, error, isLoading }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={NAVIGATION.POSTS}>
+          <Stack.Screen name={NAVIGATION.POSTS} component={Posts} options={{ headerShown: false }} />
+          <Stack.Screen name={NAVIGATION.POST} component={Post} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PostsContext.Provider>
+  );
+};
+
