@@ -11,6 +11,9 @@
     "prettier-write": "prettier --config .prettierrc.json --write 'src/**/*.{js,ts,jsx,tsx,svg}'"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.7",
+    "@react-navigation/stack": "^6.1.0",
+    "axios": "^0.25.0",
     "expo": "^44.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
