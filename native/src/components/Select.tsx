@@ -1,16 +1,17 @@
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import ChevronDownIcon from './ChevronDownIcon';
 import colors from '../styles/colors';
 import { margin, padding } from '../styles/layout';
-import { sizes } from '../styles/sizes';
+import { borderRadius, borderWidth, sizes } from '../styles/sizes';
+import { THandleSelectPress, TOptions } from '../types/extra';
 
 interface IProps {
-  options: { value: string; label: string }[];
+  options: TOptions;
   value: string;
-  handlePress: (value: string) => () => void;
+  handlePress: THandleSelectPress;
   placeholder: string;
 }
 
@@ -20,8 +21,6 @@ const Select = ({
   handlePress,
   placeholder,
 }: IProps): JSX.Element => {
-  const ref = React.useRef();
-
   return (
     <RNPickerSelect
       onValueChange={(v) => handlePress(v)()}
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     position: 'absolute',
     right: margin.md,
-    top: margin.lg
+    top: margin.lg,
   },
   chevronDown: {
     display: 'none',
@@ -50,8 +49,8 @@ const styles = StyleSheet.create({
   },
   inputAndroid: {
     borderColor: colors.lightGray,
-    borderRadius: 2,
-    borderWidth: 1,
+    borderRadius: borderRadius,
+    borderWidth: borderWidth,
     color: colors.black,
     fontSize: sizes.md,
     height: 48,
@@ -61,8 +60,8 @@ const styles = StyleSheet.create({
   },
   inputIOS: {
     borderColor: colors.lightGray,
-    borderRadius: 2,
-    borderWidth: 1,
+    borderRadius: borderRadius,
+    borderWidth: borderWidth,
     color: colors.black,
     fontSize: sizes.md,
     height: 48,

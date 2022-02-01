@@ -5,5 +5,6 @@ export default {
   lightGray: '#B2B2B2',
   black: '#2F3D49',
   deepBlack: '#000000',
-  orange: '#FF6C37'
+  orange: '#FF6C37',
+  transparent: 'transparent',
 };

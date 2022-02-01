@@ -5,8 +5,10 @@ import { useIsFocused } from '@react-navigation/native';
 import PostsContext from '../PostsContext';
 import PostUtils from '../utils/PostUtils';
 import PostListItem from '../components/PostListItem';
-import Select from '../components/Select';
 import { NAVIGATION } from '../constants';
+import { TNavigate } from '../types/extra';
+import ListHeaderComponent from '../components/ListHeaderComponent';
+import { margin, padding } from '../styles/layout';
 
 interface IProps {
   route: {
@@ -16,59 +18,65 @@ interface IProps {
   };
   navigation: {
     setParams: (params: { authorId: string }) => void;
-    navigate: (route: string, params?: any) => void;
+    navigate: TNavigate;
   };
 }
 
+/**
+ * @description Renders the posts list, handles various
+ * business logic (parsing posts by author, etc.)
+ */
 const Posts = ({ route, navigation }: IProps) => {
   const { posts } = React.useContext(PostsContext);
   const isFocused = useIsFocused();
 
   React.useEffect(() => {
+    /**
+     * @description When focus is lost, make sure to reset
+     * the current author filter. May be removed if keeping the
+     * filter when navigating back here is preferred.
+     */
     if (!isFocused) {
       navigation.setParams({ authorId: '' });
     }
   }, [isFocused]);
 
+  /**
+   * @description Used solely to reduce code duplication, since
+   * `authorId` is used in quite a few places.
+   */
   const authorId = React.useMemo(() => {
-    return route.params?.authorId;
+    return route.params?.authorId ?? '';
   }, [route.params?.authorId]);
 
+  /**
+   * @description Memoize these since they shouldn't change
+   * unless authorId` also changes.
+   */
   const displayablePosts = React.useMemo(() => {
+    /**
+     * If we have an `authorId`, filter the list of posts.
+     */
     if (authorId) {
       return PostUtils.getPostsByAuthor(posts, authorId);
     }
+    /**
+     * Otherwise, show all the posts.
+     */
     return PostUtils.getPostsFromHash(posts);
   }, [posts, authorId]);
 
-  const dropdownOptions = React.useMemo(() => {
-    return PostUtils.getAuthorsForDropdown(posts);
-  }, [posts]);
-
-  const handleDropdownPress = React.useCallback(
-    (id: string) => () => {
-      navigation.setParams({ authorId: id });
-    },
-    [navigation]
-  );
-
+  /**
+   * @description Callback for the `PostListItem` component.
+   * Fires off a navigation change to the `post` screen
+   * for the selected author's post.
+   */
   const handleItemPress = React.useCallback(
     (aId: string, postId: string) => () => {
       navigation.navigate(NAVIGATION.POST, { authorId: aId, postId });
     },
     [navigation, posts]
   );
-
-  const ListHeaderComponent = React.useMemo(() => {
-    return (
-      <Select
-        options={dropdownOptions}
-        value={authorId}
-        handlePress={handleDropdownPress}
-        placeholder={authorId ? 'Clear Selected Author' : 'Select an Author'}
-      />
-    );
-  }, [authorId, dropdownOptions, handleDropdownPress]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -78,7 +86,9 @@ const Posts = ({ route, navigation }: IProps) => {
         renderItem={(item) => (
           <PostListItem {...item} handlePress={handleItemPress} />
         )}
-        ListHeaderComponent={ListHeaderComponent}
+        ListHeaderComponent={() => (
+          <ListHeaderComponent authorId={authorId} navigation={navigation} />
+        )}
         ListHeaderComponentStyle={styles.listHeaderComponentStyle}
       />
     </SafeAreaView>
@@ -86,17 +96,11 @@ const Posts = ({ route, navigation }: IProps) => {
 };
 
 const styles = StyleSheet.create({
-  listHeaderButton: {
-    alignSelf: 'flex-end',
-  },
   listHeaderComponentStyle: {
-    paddingVertical: 15,
-    marginHorizontal: 16,
-    marginBottom: 8,
-  },
-  listHeaderText: {
-    color: '#eee',
-    fontSize: 18,
+    paddingTop: padding.md,
+    paddingBottom: padding.xs,
+    marginHorizontal: margin.md,
+    marginBottom: 0,
   },
 });
 

@@ -1,17 +1,25 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+
 import colors from '../styles/colors';
 import { margin, padding } from '../styles/layout';
-import { sizes } from '../styles/sizes';
-
+import { borderRadius, borderWidth, sizes } from '../styles/sizes';
+import { THandleItemPress } from '../types/extra';
 import { IPost } from '../types/post';
 import PostUtils from '../utils/PostUtils';
 
 interface IProps {
   item: IPost;
-  handlePress: (authorId: string, postId: string) => () => void;
+  handlePress: THandleItemPress;
 }
 
+/**
+ * @componnent
+ * @description Individual post item rendered by `Posts.tsx`'s
+ * `FlatList.renderItem`. Displays the post title, author name,
+ * publication date, and truncated  body text w/ special
+ * characters removed.
+ */
 const PostListItem = ({ item, handlePress }: IProps): JSX.Element => {
   return (
     <TouchableOpacity
@@ -34,11 +42,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.offWhite,
     padding: padding.lg,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderWidth: 1,
+    marginVertical: margin.sm,
+    marginHorizontal: margin.md,
+    borderWidth: borderWidth,
     borderColor: colors.lightGray,
-    borderRadius: 5,
+    borderRadius: borderRadius,
   },
   headerText: {
     fontSize: sizes.md,

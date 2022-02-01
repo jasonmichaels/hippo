@@ -8,9 +8,15 @@ import PostsContext from './PostsContext';
 import Posts from './screens/Posts';
 import Post from './screens/Post';
 import DominantHeader from './components/DominantHeader';
+import theme from './styles/theme';
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * @component
+ * @description Fetches data, which is provided via context value.
+ * Renders the navigation stack's `Posts` and `Post` screens.
+ */
 export function App() {
   const {
     result: posts,
@@ -20,7 +26,7 @@ export function App() {
 
   return (
     <PostsContext.Provider value={{ posts, error, isLoading }}>
-      <NavigationContainer>
+      <NavigationContainer theme={theme}>
         <Stack.Navigator initialRouteName={NAVIGATION.POSTS}>
           <Stack.Screen
             name={NAVIGATION.POSTS}
