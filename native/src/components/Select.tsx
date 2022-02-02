@@ -38,7 +38,7 @@ const Select = ({
       doneText="Close"
       pickerProps={{ testID: 'PickerSelect' }}
       textInputProps={{ testID: 'PickerText' }}
-      modalProps={{ testID: "PickerModal" }}
+      modalProps={{ testID: 'PickerModal' }}
     />
   );
 };

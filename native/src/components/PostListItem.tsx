@@ -33,10 +33,16 @@ const PostListItem = ({ item, handlePress }: IProps): JSX.Element => {
       onPress={handlePress(item.author.id, item.id)}
       testID="PostListItem"
     >
-      <Text style={styles.headerText} testID={item.title}>{item.title}</Text>
+      <Text style={styles.headerText} testID={item.title}>
+        {item.title}
+      </Text>
       <View style={styles.subheaderContainer}>
-        <Text style={styles.subheaderText} testID={item.author.name}>By&nbsp;{item.author.name}</Text>
-        <Text style={styles.subheaderText} testID={item.publishedAt}>{item.publishedAt}</Text>
+        <Text style={styles.subheaderText} testID={item.author.name}>
+          By&nbsp;{item.author.name}
+        </Text>
+        <Text style={styles.subheaderText} testID={item.publishedAt}>
+          {item.publishedAt}
+        </Text>
       </View>
       <Text style={styles.bodyText} numberOfLines={3} testID={item.id}>
         {PostUtils.simplifyBodyText(item.body)}

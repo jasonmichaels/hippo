@@ -2,10 +2,13 @@ import { mockPostA, mockPostB } from './dummyData';
 
 jest.mock('./hooks/useAxios.ts', () => {
   return jest.fn(() => ({
-    result: { [mockPostA.author.id]: mockPostA, [mockPostB.author.id]: mockPostB },
+    result: {
+      [mockPostA.author.id]: mockPostA,
+      [mockPostB.author.id]: mockPostB,
+    },
     error: null,
-    isLoading: false
-  }))
+    isLoading: false,
+  }));
 });
 
 const mockedNavigate = jest.fn();

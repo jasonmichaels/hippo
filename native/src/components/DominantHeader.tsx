@@ -11,7 +11,11 @@ import { sizes } from '../styles/sizes';
  */
 const DominantHeader = (): JSX.Element => (
   <View style={styles.container}>
-    <Feather name="book-open" size={Platform.OS === 'android' ? sizes.xl : sizes.lg} color={colors.lightGray} />
+    <Feather
+      name="book-open"
+      size={Platform.OS === 'android' ? sizes.xl : sizes.lg}
+      color={colors.lightGray}
+    />
   </View>
 );
 

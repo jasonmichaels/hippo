@@ -95,7 +95,7 @@ class PostUtils {
     return PostUtils.getLatestForAuthors(posts || {}).map((p) => ({
       value: p.author.id,
       label: p.author.name,
-      color: colors.gray
+      color: colors.gray,
     }));
   }
 

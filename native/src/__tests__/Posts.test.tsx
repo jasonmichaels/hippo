@@ -17,19 +17,25 @@ const Stack = createNativeStackNavigator();
 const props = {
   navigation: {
     navigate: jest.fn(),
-    setParams: jest.fn()
+    setParams: jest.fn(),
   },
   route: {
     params: {
-      authorId: ''
-    }
-  }
-}
+      authorId: '',
+    },
+  },
+};
 
 describe('Posts', () => {
   const Tree = (
     /* @ts-expect-error: Will fix typings later */
-    <PostsContext.Provider value={{ posts: { [mockPostA.id]: mockPostA, [mockPostB.id]: mockPostB }, error: null, isLoading: false }}>
+    <PostsContext.Provider
+      value={{
+        posts: { [mockPostA.id]: mockPostA, [mockPostB.id]: mockPostB },
+        error: null,
+        isLoading: false,
+      }}
+    >
       <NavigationContainer theme={theme}>
         <Stack.Navigator
           initialRouteName={NAVIGATION.POSTS}
@@ -51,11 +57,11 @@ describe('Posts', () => {
   );
   test('renders a list of posts', async () => {
     const { getAllByTestId } = render(Tree);
-    const posts = getAllByTestId("PostListItem");
+    const posts = getAllByTestId('PostListItem');
     expect(posts.length).toBe(2);
   });
 
-  test("PostListItem displays title, author, publishedAt, and summary", async () => {
+  test('PostListItem displays title, author, publishedAt, and summary', async () => {
     const { getByTestId } = render(Tree);
 
     expect(getByTestId(mockPostA.title)).toBeDefined();
@@ -63,17 +69,22 @@ describe('Posts', () => {
     expect(getByTestId(mockPostA.publishedAt)).toBeDefined();
 
     const summary = getByTestId(mockPostA.id);
-    expect(summary.props.children).toEqual(PostUtils.simplifyBodyText(mockPostA.body));
+    expect(summary.props.children).toEqual(
+      PostUtils.simplifyBodyText(mockPostA.body)
+    );
   });
 
   test('PostListItem taps cue navigation to the Post screen', async () => {
     const { getAllByTestId } = render(Tree);
-    const post = getAllByTestId("PostListItem")[0];
+    const post = getAllByTestId('PostListItem')[0];
     expect(post).not.toBeNull();
     fireEvent(post, 'onPress');
 
     const spy = jest.spyOn(props.navigation, 'navigate');
-    expect(spy).toHaveBeenCalledWith(NAVIGATION.POST, { postId: mockPostA.id, authorId: mockPostA.author.id });
+    expect(spy).toHaveBeenCalledWith(NAVIGATION.POST, {
+      postId: mockPostA.id,
+      authorId: mockPostA.author.id,
+    });
   });
 
   /**
