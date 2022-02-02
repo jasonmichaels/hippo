@@ -74,7 +74,9 @@ class PostUtils {
     const latest = [];
 
     for (const key in posts) {
-      latest.push(posts[key][0]);
+      if (posts?.[key]?.length) {
+        latest.push(posts[key][0]);
+      }
     }
 
     return orderBy(latest, 'lastName', 'asc');
@@ -101,7 +103,7 @@ class PostUtils {
    * of options objects.
    */
   static getAuthorsForDropdown(posts: IPostsHash): TOptions {
-    return PostUtils.getLatestForAuthors(posts).map((p) => ({
+    return PostUtils.getLatestForAuthors(posts || {}).map((p) => ({
       value: p.author.id,
       label: p.author.name,
     }));

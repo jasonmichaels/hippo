@@ -33,7 +33,7 @@ const Post = ({ navigation, route }: IProps): JSX.Element => {
    * @TODO Perhaps store posts keyed by `post.id`?
    */
   const post: IPost | undefined = React.useMemo(() => {
-    return posts[route.params.authorId].find(
+    return posts?.[route?.params?.authorId]?.find?.(
       (p) => p.id === route.params.postId
     );
   }, [route?.params?.authorId, route?.params?.postId, posts]);

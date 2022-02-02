@@ -31,6 +31,9 @@ const Select = ({
       useNativeAndroidPickerStyle={false}
       placeholder={{ value: '', label: placeholder, color: colors.orange }}
       doneText="Close"
+      pickerProps={{ testID: 'PickerSelect' }}
+      textInputProps={{ testID: 'PickerText' }}
+      modalProps={{ testID: "PickerModal" }}
     />
   );
 };
