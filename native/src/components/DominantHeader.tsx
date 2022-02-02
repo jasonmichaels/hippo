@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import colors from '../styles/colors';
@@ -11,7 +11,7 @@ import { sizes } from '../styles/sizes';
  */
 const DominantHeader = (): JSX.Element => (
   <View style={styles.container}>
-    <Feather name="book-open" size={sizes.xl} color={colors.lightGray} />
+    <Feather name="book-open" size={Platform.OS === 'android' ? sizes.xl : sizes.lg} color={colors.lightGray} />
   </View>
 );
 
