@@ -1,9 +1,10 @@
 import { orderBy, last, flatten, values, trim } from 'lodash';
-import 'intl';
-import 'intl/locale-data/jsonp/en';
+import momentTimezone from 'moment-timezone';
 
 import { TOptions } from '../types/extra';
 import { IPostsHash, TPostsArray, IPost } from '../types/post';
+import colors from '../styles/colors';
+import { DATETIME_FORMAT } from '../constants';
 
 /**
  * @class
@@ -12,18 +13,6 @@ import { IPostsHash, TPostsArray, IPost } from '../types/post';
  * properties.
  */
 class PostUtils {
-  /**
-   * @static
-   * @description Intl formatting options object used
-   * in `PostUtils.utcToLocalDateTime`.
-   */
-  static get intlOptions(): Intl.DateTimeFormatOptions {
-    return {
-      dateStyle: 'short',
-      timeStyle: 'short',
-    };
-  }
-
   /**
    * @static
    * @description Constructs an objects, keyed by `uathor.id`,
@@ -106,6 +95,7 @@ class PostUtils {
     return PostUtils.getLatestForAuthors(posts || {}).map((p) => ({
       value: p.author.id,
       label: p.author.name,
+      color: colors.gray
     }));
   }
 
@@ -125,11 +115,8 @@ class PostUtils {
    * to a formatted one. Used in the `PostListItem` component.
    */
   static utcToLocalDateTime(datetime: string): string {
-    const localDatetime = new Intl.DateTimeFormat(
-      navigator?.language ?? 'en-US',
-      PostUtils.intlOptions
-    ).format(new Date(datetime));
-    return localDatetime.replace(', ', ' - ');
+    const timezone = momentTimezone.tz.guess();
+    return momentTimezone.utc(datetime).tz(timezone).format(DATETIME_FORMAT);
   }
 
   /**

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRoute } from '@react-navigation/native';
 
 import Select from './Select';
 import PostsContext from '../PostsContext';
@@ -12,6 +11,12 @@ type TProps = {
   };
 };
 
+/**
+ * @component
+ * @description Essentially, a business-logic wrapper for the `Select`
+ * component. In case `Select` is used elsewhere, this passes
+ * options, value, the handler, and placeholder props on down.
+ */
 const ListHeaderComponent = ({ authorId, navigation }: TProps): JSX.Element => {
   const { posts } = React.useContext(PostsContext);
 

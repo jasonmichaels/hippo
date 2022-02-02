@@ -13,4 +13,6 @@ const URLS = {
   POSTS: 'http://192.168.4.73:4000/posts',
 };
 
-export { METHODS, URLS, NAVIGATION };
+const DATETIME_FORMAT = 'M/D/YY [at] h:mm A';
+
+export { METHODS, URLS, NAVIGATION, DATETIME_FORMAT };

@@ -15,6 +15,11 @@ interface IProps {
   placeholder: string;
 }
 
+/**
+ * @component
+ * @description Wrapper for the `RNPickerSelect`, solely a presentational
+ * wrapper
+ */
 const Select = ({
   options,
   value,
@@ -24,7 +29,7 @@ const Select = ({
   return (
     <RNPickerSelect
       onValueChange={(v) => handlePress(v)()}
-      items={options.map((o) => ({ ...o, color: colors.gray }))}
+      items={options}
       value={value}
       style={styles}
       Icon={() => <ChevronDownIcon />}
